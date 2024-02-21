@@ -6,15 +6,38 @@
     <title>Vanilla Cupcakes</title>
     <style>
         body {
+            font-size: 24px;
+            max-width: 400px;
+            margin: 10px auto 100px;
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+            line-height: 1.8;
+        }
+        h2 {
+            font-size: 38px;
+            line-height: 1;
+            margin-bottom: 0;
         }
         img {
             max-width: 400px;
             display: block;
             margin: 0 auto;
         }
+        .review {
+            border-bottom: 1px solid #a0a0a0;
+            padding: 30px 0;
+        }
+        .review > div {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
     <img src="cupcakes.jpg">
+    <div>
+        <h2>Reviews</h2>
+        <div class="review">"You did good, Marty. The type of frosting goes with the type of cupcake."
+            <div>-John Cole 805</div>
+        </div>
+    </div>
 </body>
 </html>
