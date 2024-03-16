@@ -7,7 +7,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        // pair chocolate with: sale, vanilla, cloves, cinnamon, cardamom, ginger, orange peel, peppercorns, bay leaf, star anise, nutmeg, allspice, 
+        var cupcakeData = {
+            fruit: {
+                red: 'Strawberry',
+                orange: 'Orange',
+                yellow: 'Lemon',
+                green: 'Kiwi',
+                purple: 'Grape',
+                blue: 'Blueberry',
+            },
+            exotic: {
+                red: 'Guava',
+                orange: 'Ground Cherry',
+                yellow: 'Gooseberry',
+                green: 'Nopales', // Feijoa, Cucamelons
+                purple: 'Dragonfruit',
+                blue: 'Blue Pearmain Apple',
+            },
+            existentialism: {
+                // existential crisis
+                // dread
+                // anxiety
+                // absurdity
+                // no free will
+                // what is life good for?
+                // consciousness
+                // facticity
+                // angst
+            },
+            flavors: ['Vanilla', 'Cookies and Cream', 'Cream Puff', 'Oreo', 'Chocolate/Vanilla Swirl']
+        }
+    </script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-size: 24px;
             max-width: 400px;
@@ -17,7 +53,7 @@
         }
         h2 {
             font-size: 38px;
-            line-height: 1;
+            line-height: 1.1;
             margin-bottom: 0;
         }
         img {
@@ -33,9 +69,48 @@
         .review > div {
             text-align: right;
         }
-        /* * {
-            box-sizing: border-box;
-        } */
+        .order {
+            font-size: 16px;
+        }
+        .order div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .order input {
+            border: 1px solid #a0a0a0;
+            padding: 4px 10px;
+            max-width: 70px;
+        }
+        .order [type="text"],
+        .order [type="tel"],
+        .order [type="date"],
+        .order [type="time"] {
+            max-width: 132px;
+        }
+        h3 {
+            font-size: 38px;
+            margin-top: 38px;
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+        h4 {
+            margin-top: 12px;
+            font-size: 11px;
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .order button {
+            border: 0;
+            background: #0075ff;
+            padding: 12px 18px;
+            color: white;
+            display: block;
+            margin-left: auto;
+            cursor: pointer;
+            font-size: 20px;
+        }
         @media (max-width: 991px) {
             body {
                 margin: 10px 10px 100px;
@@ -46,7 +121,7 @@
 <body>
     <img src="cupcakes.jpg">
     <div>
-        <h2>Reviews</h2>
+        <h3>Reviews</h3>
         <div class="review">"You did good, Marty. The type of frosting goes with the type of cupcake."
             <div>-John Cole 805</div>
         </div>
@@ -59,9 +134,43 @@
         <div class="review">"Pretty good 👍"
             <div>-Shannon</div>
         </div>
-        <div class="review" style="text-align: center;">
-            <a target="_blank" href="mailto:whack47@gmail.com">Order Cupcakes</a>
-        </div>
+    </div>
+
+    <div>
+        <h3>Order Form</h3>
+        <h4>Enter how many of each cupcake you'd like</h4>
+        <div class="order"></div>
+        <script>
+            for (var i = 0; i < cupcakeData.flavors.length; i += 1) {
+                document.querySelector('.order').innerHTML += `
+                    <div><span>${cupcakeData.flavors[i]}</span><input type="number" name="${cupcakeData.flavors[i]}" value="0"></div>
+                `;
+            }
+            document.querySelector('.order').innerHTML += `
+                <div><span>Name</span><input type="text"></div>
+                <div><span>Phone number</span><input type="tel"></div>
+                <div><span>Date</span><input type="date"></div>
+                <div><span>Time</span><input type="time"></div>
+                <button target="_blank" href="">Order Cupcakes</button>
+            `;
+            document.querySelector('.order button').addEventListener('click', function (e) {
+                var body = 'Please make me ';
+                var el;
+                var cupcakeCount = 0;
+                for (var i = 0; i < cupcakeData.flavors.length; i += 1) {
+                    el = document.querySelector(`[name="${cupcakeData.flavors[i]}"]`);
+                    if (el) {
+                        if (el.value !== '0') {
+                            cupcakeCount += Number(el.value);
+                            body += el.value + ` ${cupcakeData.flavors[i]}\r\n`;
+                        }
+                    }
+                }
+                body += document.querySelector('[type="tel"]').value;
+                if (!cupcakeCount) return alert('Add some cupcakes');
+                window.open('mailto:whack47@gmail.com?subject=Cupcake Order&body=' + body);
+            });
+        </script>
     </div>
 </body>
 </html>
