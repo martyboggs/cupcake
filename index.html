@@ -166,8 +166,16 @@
                         }
                     }
                 }
-                body += document.querySelector('[type="tel"]').value;
+                var name = document.querySelector('[type="text"]').value;
+                var telephone = document.querySelector('[type="tel"]').value;
+                var date = document.querySelector('[type="date"]').value;
+                var time = document.querySelector('[type="time"]').value;
                 if (!cupcakeCount) return alert('Add some cupcakes');
+                if (!name || !telephone) return alert('Add name and number');
+                if (!date || !time) return alert('Enter valid time and date');
+                body += ' ' + name;
+                body += ' ' + telephone;
+                body += ' ' + new Date(date + 'T' + time);
                 window.open('mailto:whack47@gmail.com?subject=Cupcake Order&body=' + body);
             });
         </script>
