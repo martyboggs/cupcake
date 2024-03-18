@@ -48,14 +48,14 @@
         }
         body {
             font-size: 24px;
-            max-width: 400px;
+            max-width: 440px;
             margin: 10px auto;
             font-family: 'Libre Baskerville', 'Segoe UI', Arial, Helvetica, sans-serif;
             line-height: 1.8;
             background: #f4bbb9;
         }
         .social {
-            margin: 60px 0 30px;
+            margin: 40px 0;
             text-align: center;
         }
         .social a {
@@ -77,8 +77,10 @@
             margin: 0 auto;
         }
         .review {
-            border-bottom: 1px solid #a0a0a0;
             padding: 30px 0;
+        }
+        .review:not(:last-child) {
+            border-bottom: 1px solid #a0a0a0;
         }
         .review > div {
             text-align: right;
@@ -109,7 +111,7 @@
         }
         h3 {
             font-size: 38px;
-            margin-top: 38px;
+            margin-top: 0;
             margin-bottom: 0;
             line-height: 1.1;
         }
@@ -119,6 +121,14 @@
             font-weight: normal;
             text-transform: uppercase;
             letter-spacing: 2px;
+        }
+        .reviews,
+        .order-form {
+            padding: 20px;
+            background: #f3f3f3;
+            /* border: 1px solid #a1a1a1; */
+            margin: 20px 0 40px;
+            border-radius: 15px;
         }
         .order button {
             border: 0;
@@ -140,7 +150,7 @@
 <body>
     <h1>Vanilla Cupcakes</h1>
     <img class="logo" src="cupcake-logo.png">
-    <div>
+    <div class="reviews">
         <h3>Reviews</h3>
         <div class="review">"You did good, Marty. The type of frosting goes with the type of cupcake."
             <div>-John Cole 805</div>
@@ -156,7 +166,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="order-form">
         <h3>Order Form</h3>
         <h4>Enter how many of each cupcake you'd like</h4>
         <div class="order"></div>
@@ -199,12 +209,12 @@
                 window.open('mailto:whack47@gmail.com?subject=Cupcake Order&body=' + body);
             });
         </script>
+    </div>
 
-        <div class="social">
-            <a href="https://www.instagram.com/martybusinesss/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@PixelPropertyCupcakeCreations" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-            <a href="https://linktr.ee/martyboggs" target="_blank"><i class="fa-solid fa-tree"></i></a>
-        </div>
+    <div class="social">
+        <a href="https://www.instagram.com/martybusinesss/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@PixelPropertyCupcakeCreations" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://linktr.ee/martyboggs" target="_blank"><i class="fa-solid fa-tree"></i></a>
     </div>
 </body>
 </html>
