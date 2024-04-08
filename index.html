@@ -9,38 +9,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
-        // pair chocolate with: sale, vanilla, cloves, cinnamon, cardamom, ginger, orange peel, peppercorns, bay leaf, star anise, nutmeg, allspice, 
+        // pair chocolate with: sale, vanilla, cloves, cinnamon, cardamom, ginger, orange peel, peppercorns, bay leaf, star anise, nutmeg, allspice
         var cupcakeData = {
-            fruit: {
-                red: 'Strawberry',
-                orange: 'Orange',
-                yellow: 'Lemon',
-                green: 'Kiwi',
-                purple: 'Grape',
-                blue: 'Blueberry',
+            cupcake: {
+                flavors: ['Vanilla', 'Cookies and Cream', 'Cream Puff', 'Chocolate/Vanilla Swirl'],
+                comingSoon: ['Lemon'],
+                reviews: [
+                    {name: 'John Cole 805', review: 'You did good, Marty. The type of frosting goes with the type of cupcake.'},
+                    {name: 'Taryn', review: 'I was very impressed with the juxtaposition of the icing!'},
+                    {name: 'Erin', review: 'Great flavor in the cake. The icing was so light and fluffy! The unsung hero of birthday parties rises again!'},
+                    {name: 'Shannon', review: 'Pretty good 👍'},
+                ]
             },
-            exotic: {
-                red: 'Guava',
-                orange: 'Ground Cherry',
-                yellow: 'Gooseberry',
-                green: 'Nopales', // Feijoa, Cucamelons
-                purple: 'Dragonfruit',
-                blue: 'Blue Pearmain Apple',
+            pizza: {
+                flavors: ['Cheese', 'Pepperoni', 'Sausage', 'Spicy', 'Hot Honey', 'Pineapple'],
+                comingSoon: [''],
+                reviews: [
+                    // {name: 'John Cole 805', review: 'You did good, Marty. The type of frosting goes with the type of cupcake.'},
+                    // {name: 'Taryn', review: 'I was very impressed with the juxtaposition of the icing!'},
+                    // {name: 'Erin', review: 'Great flavor in the cake. The icing was so light and fluffy! The unsung hero of birthday parties rises again!'},
+                    // {name: 'Shannon', review: 'Pretty good 👍'},
+                ]
             },
-            existentialism: {
-                // existential crisis
-                // dread
-                // anxiety
-                // absurdity
-                // no free will
-                // what is life good for?
-                // consciousness
-                // facticity
-                // angst
-            },
-            flavors: ['Vanilla', 'Cookies and Cream', 'Cream Puff', 'Chocolate/Vanilla Swirl'],
-            comingSoon: ['Lemon'],
-        }
+        };
     </script>
     <style>
         * {
@@ -77,6 +68,9 @@
             display: block;
             margin: 0 auto;
         }
+        .logo {
+            cursor: pointer;
+        }
         .review {
             padding: 30px 0;
         }
@@ -87,7 +81,7 @@
             text-align: right;
         }
         h1 {
-            line-height: 1.1;
+            line-height: 1.2;
             text-align: center;
             margin-bottom: 0;
         }
@@ -121,6 +115,7 @@
             margin-left: auto;
             cursor: pointer;
             font-size: 20px;
+            text-transform: capitalize;
         }
         .order {
             font-size: 16px;
@@ -147,64 +142,76 @@
 <body>
     <h1>Vanilla Cupcakes</h1>
     <img class="logo" src="cupcake-logo.png">
-    <div class="reviews">
-        <h3>Reviews</h3>
-        <div class="review">"You did good, Marty. The type of frosting goes with the type of cupcake."
-            <div>-John Cole 805</div>
-        </div>
-        <div class="review">"I was very impressed with the juxtaposition of the icing!"
-            <div>-Taryn</div>
-        </div>
-        <div class="review">"Great flavor in the cake. The icing was so light and fluffy! The unsung hero of birthday parties rises again!"
-            <div>-Erin</div>
-        </div>
-        <div class="review">"Pretty good 👍"
-            <div>-Shannon</div>
-        </div>
-    </div>
+    <div class="reviews"></div>
 
     <div class="order-form">
         <h3>Order Form</h3>
-        <h4>Enter cupcake quantities below</h4>
+        <h4>Enter <span class="type">cupcake</span> quantities below</h4>
         <div class="order"></div>
         <script>
-            for (var i = 0; i < cupcakeData.flavors.length; i += 1) {
+            var type = 'cupcake';
+
+            document.querySelector('.logo').addEventListener('click', function (e) {
+                type = type === 'cupcake' ? 'pizza' : 'cupcake';
+                loadPage();
+            });
+
+            function loadPage() {
+                document.querySelector('.reviews').innerHTML = '<h3>Reviews</h3>';
+                for (var i = 0; i < cupcakeData[type].reviews.length; i += 1) {
+                    document.querySelector('.reviews').innerHTML += `<div class="review">"${cupcakeData[type].reviews[i].review}"<div>${cupcakeData[type].reviews[i].name}</div></div>`;
+                }
+                if (type === 'cupcake') {
+                    document.querySelector('title').innerHTML = document.querySelector('h1').innerHTML = 'Vanilla Cupcakes';
+                    document.body.style.background = '#f4bbb9';
+                    document.querySelector('.logo').src = 'cupcake-logo.png';
+                } else {
+                    document.querySelector('title').innerHTML = document.querySelector('h1').innerHTML = 'Crazy Puffy Pizza Things';
+                    document.body.style.background = '#f4deb9';
+                    document.querySelector('.logo').src = 'pizza-logo.png';
+                }
+                document.querySelector('.type').innerHTML = type;
+                document.querySelector('.order').innerHTML = '';
+                for (var i = 0; i < cupcakeData[type].flavors.length; i += 1) {
+                    document.querySelector('.order').innerHTML += `
+                        <div><span>${cupcakeData[type].flavors[i]}</span><input type="number" name="${cupcakeData[type].flavors[i]}" value="0"></div>
+                    `;
+                }
                 document.querySelector('.order').innerHTML += `
-                    <div><span>${cupcakeData.flavors[i]}</span><input type="number" name="${cupcakeData.flavors[i]}" value="0"></div>
-                `;
-            }
-            document.querySelector('.order').innerHTML += `
                 <div><span>Name</span><input type="text"></div>
                 <div><span>Phone number</span><input type="tel"></div>
                 <div><span>Date</span><input type="date"></div>
                 <div><span>Time</span><input type="time"></div>
-                <button target="_blank" href="">Order Cupcakes</button>
-            `;
-            document.querySelector('.order button').addEventListener('click', function (e) {
-                var body = 'Please make me ';
-                var el;
-                var cupcakeCount = 0;
-                for (var i = 0; i < cupcakeData.flavors.length; i += 1) {
-                    el = document.querySelector(`[name="${cupcakeData.flavors[i]}"]`);
-                    if (el) {
-                        if (el.value !== '0') {
-                            cupcakeCount += Number(el.value);
-                            body += el.value + ` ${cupcakeData.flavors[i]}\r\n`;
+                <button target="_blank" href="">Order ${type}s</button>
+                `;
+                document.querySelector('.order button').addEventListener('click', function (e) {
+                    var body = 'Please make me ';
+                    var el;
+                    var cupcakeCount = 0;
+                    for (var i = 0; i < cupcakeData[type].flavors.length; i += 1) {
+                        el = document.querySelector(`[name="${cupcakeData[type].flavors[i]}"]`);
+                        if (el) {
+                            if (el.value !== '0') {
+                                cupcakeCount += Number(el.value);
+                                body += el.value + ` ${cupcakeData[type].flavors[i]}\r\n`;
+                            }
                         }
                     }
-                }
-                var name = document.querySelector('[type="text"]').value;
-                var telephone = document.querySelector('[type="tel"]').value;
-                var date = document.querySelector('[type="date"]').value;
-                var time = document.querySelector('[type="time"]').value;
-                if (!cupcakeCount) return alert('Add some cupcakes');
-                if (!name || !telephone) return alert('Add name and number');
-                if (!date || !time) return alert('Enter valid time and date');
-                body += ' ' + name;
-                body += ' ' + telephone;
-                body += ' ' + new Date(date + 'T' + time);
-                window.open('mailto:whack47@gmail.com?subject=Cupcake Order&body=' + body);
-            });
+                    var name = document.querySelector('[type="text"]').value;
+                    var telephone = document.querySelector('[type="tel"]').value;
+                    var date = document.querySelector('[type="date"]').value;
+                    var time = document.querySelector('[type="time"]').value;
+                    if (!cupcakeCount) return alert('Add some cupcakes');
+                    if (!name || !telephone) return alert('Add name and number');
+                    if (!date || !time) return alert('Enter valid time and date');
+                    body += ' ' + name;
+                    body += ' ' + telephone;
+                    body += ' ' + new Date(date + 'T' + time);
+                    window.open('mailto:whack47@gmail.com?subject=Cupcake Order&body=' + body);
+                });
+            }
+            loadPage();
+
         </script>
     </div>
 
