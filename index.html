@@ -193,7 +193,7 @@
                         if (el) {
                             if (el.value !== '0') {
                                 cupcakeCount += Number(el.value);
-                                body += el.value + ` ${cupcakeData[type].flavors[i]}\r\n`;
+                                body += el.value + ` ${cupcakeData[type].flavors[i]}, `;
                             }
                         }
                     }
@@ -201,13 +201,13 @@
                     var telephone = document.querySelector('[type="tel"]').value;
                     var date = document.querySelector('[type="date"]').value;
                     var time = document.querySelector('[type="time"]').value;
-                    if (!cupcakeCount) return alert('Add some cupcakes');
+                    if (!cupcakeCount) return alert(`Add some ${type}s`);
                     if (!name || !telephone) return alert('Add name and number');
                     if (!date || !time) return alert('Enter valid time and date');
-                    body += ' ' + name;
-                    body += ' ' + telephone;
+                    body += ' name: ' + name;
+                    body += ' phone: ' + telephone;
                     body += ' ' + new Date(date + 'T' + time);
-                    window.open('mailto:whack47@gmail.com?subject=Cupcake Order&body=' + body);
+                    window.open(`mailto:whack47@gmail.com?subject=${type} order&body=` + body);
                 });
             }
             loadPage();
